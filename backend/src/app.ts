@@ -17,7 +17,7 @@ export default class App {
     }
 
 
-    listen(port: number, host: string, cb: () => void ): void {
+    public listen(port: number, host: string, cb: () => void ): void {
         this.app.listen(port, host, cb);
     }
 
