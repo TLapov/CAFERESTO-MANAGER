@@ -1,7 +1,8 @@
-import express from 'express';
+import App from "./src/app";
+import { HOST, PORT } from "./src/config/dotenv.config";
 
-const app = express();
+const server = new App();
 
-app.listen(3000, () => {
-    console.log("Hello world");
-})
+server.listen(PORT, HOST,  () => {
+    console.log(`Server listen on http://${HOST}:${PORT}`);
+});
