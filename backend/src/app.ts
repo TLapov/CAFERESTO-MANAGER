@@ -1,8 +1,8 @@
 import express from 'express';
 import { AppController } from './controllers/app.controller';
 import errorMiddleware from './middlewares/error.middleware';
+import { ExpressApp } from './helpers/types.helper';
 
-export type ExpressApp = express.Application;
 
 export default class App {
     app: ExpressApp;
