@@ -1,7 +1,7 @@
 import { API } from "../config/dotenv.config";
+import { ExpressApp } from "../helpers/types.helper";
 import { CategoryController } from "./category.controller";
 import { ProductController } from "./product.controller";
-import { ExpressApp } from "../app";
 
 export class AppController {
     app: ExpressApp;
