@@ -2,16 +2,16 @@ import { ResultSetHeader } from "mysql2";
 import db from "../config/db.config";
 
 export class BaseModel {
-    tableName: string;
-    primaryKey: string;
+    tableName!: string;
+    primaryKey!: string;
 
-    async get<T>(): Promise<T[]> {
+    async sqlFind<T>(): Promise<T[]> {
         const sql = `SELECT * FROM ${this.tableName}`;
         const [result] = await db.execute(sql);
         return result as T[];
     }
 
-    async create<T extends Record<string, any>>(data: T) {
+    async sqlCreate<T extends Record<string, any>>(data: T) {
         const keys = Object.keys(data).join(', ');
         const values = Object.values(data);
         const placeholders = values.map(() => '?').join(', ');
@@ -20,10 +20,10 @@ export class BaseModel {
         return result as ResultSetHeader;
     }
 
-    async update<T extends Record<string, any>>(id: number, data: T) {
+    async sqlUpdate<T extends Record<string, any>>(id: number, data: T) {
         const keys = Object.keys(data).map(key => `${key} = ?`).join(', ');
         const values = Object.values(data);
-        const sql = `UPDATE ${this.tableName} SET ${keys} WHERE id = ?`;
+        const sql = `UPDATE ${this.tableName} SET ${keys} WHERE ${this.primaryKey} = ?`;
         const [result] = await db.execute(sql, [...values, id]);
         return result as ResultSetHeader;
     }

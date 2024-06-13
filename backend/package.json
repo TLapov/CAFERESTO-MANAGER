@@ -1,11 +1,12 @@
 {
   "name": "caferesto-manager-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "build": "tsc --build",
     "start": "node ./build/server",
-    "dev": "nodemon ./server.ts"
+    "dev": "nodemon ./server.ts",
+    "migrate": "nodemon ./src/models/migrations/index.ts"
   },
   "keywords": [],
   "author": "",

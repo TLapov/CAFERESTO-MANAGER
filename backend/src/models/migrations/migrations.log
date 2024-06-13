@@ -1,0 +1,3 @@
+CREATED: 13. 06. 2024. 01:16:33 FILE: create-database.sql DESCRIPTION: testing
+CREATED: 13. 06. 2024. 01:24:15 FILE: 001.sql DESCRIPTION: creating_category_table
+CREATED: 13. 06. 2024. 12:34:54 FILE: 002-category.sql DESCRIPTION: add_unique_constrain_to_name

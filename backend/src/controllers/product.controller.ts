@@ -1,9 +1,12 @@
 import { NextFunction, Router, Response, Request } from "express";
-import { BASE_PATH } from "../helpers/constant.helper";
+import { BASE_PATH, HttpStatusCode } from "../helpers/constant.helper";
+import { AppResponse } from '../utils/response.util';
+import { CategoryService } from "../services/category.servise";
 
 export class ProductController  {
     router: Router = Router();
-
+    categoryService = new CategoryService();
+    
     constructor() {
         this.router.get(BASE_PATH, this.getProducts);
         this.router.post(BASE_PATH,this.createProduct);
@@ -12,7 +15,14 @@ export class ProductController  {
     }
 
     getProducts = async(req: Request, res: Response, next: NextFunction) => {
-        res.send('Bravo');
+        try {
+            const categories = await this.categoryService.getCategories();
+            
+            AppResponse.createApiResponse(res, HttpStatusCode.SUCCESS, 'Uspješan dohvat kategorije', categories);
+
+        } catch (error) {
+            next(error);
+        }
     }
 
     createProduct = async(req: Request, res: Response, next: NextFunction) => {
