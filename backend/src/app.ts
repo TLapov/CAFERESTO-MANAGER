@@ -2,6 +2,7 @@ import express from 'express';
 import { AppController } from './controllers/app.controller';
 import errorMiddleware from './middlewares/error.middleware';
 import { ExpressApp } from './helpers/types.helper';
+import cors from 'cors';
 
 
 export default class App {
@@ -10,6 +11,7 @@ export default class App {
     constructor() {
         this.app = express();
         this.app.use(express.json());
+        this.app.use(cors());
         this.initRoutes();
         this.initError();
     }
