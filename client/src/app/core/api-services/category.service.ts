@@ -1,15 +1,36 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, catchError, map, throwError } from "rxjs";
+import { ICategory } from "../models/category.model";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CategoryService {
     http: HttpClient = inject(HttpClient);
+    basePath: string = `${environment.apiBasePath}/category`;
 
-    getCategories(): Observable<any> {
-        return this.http.get('http://localhost:8800/api/v1/product');
+    getCategories() {
+        return this.http.get<any>(this.basePath).pipe(map((response) => {
+            return response.data;
+        }), catchError((err) => {
+            return throwError(() => err);
+        }))
+    }
+    
+    createCategory(data: ICategory) {
+        return this.http.post(this.basePath, data).pipe(catchError(err => {
+            return throwError(() => err);
+        }));
+    }
+
+    updateCategory() {
+
+    }
+
+    deleteCategory() {
+
     }
 }
 
