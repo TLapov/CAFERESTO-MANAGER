@@ -1,0 +1,14 @@
+<div class="input-container">
+    <div class="input-container__label">
+        <label [for]="name">{{label}}</label>
+    </div>
+    
+    <div class="input-container__label">
+        <input 
+            [type]="type"
+            [name]="name"
+            [id]="name"
+            (input)="onInputChange($event)"
+        >
+    </div>
+</div>

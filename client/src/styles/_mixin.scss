@@ -1,0 +1,30 @@
+@mixin sizeXY($width, $height){
+    width: $width;
+    height: $height;
+};
+
+@mixin flexSimpleOption($align, $justify) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+};
+
+$breakpoints: (
+    "xsmall": 22rem,
+    "small": 40rem,
+    "medium": 56rem,
+    "large": 75rem,
+    "xlarge": 91rem,
+);
+
+@mixin responsiveToMax($size) {
+    @media (min-width: map-get($breakpoints, $size)) {
+        @content;
+    };
+};
+
+@mixin responsiveToMin($size) {
+    @media (max-width: map-get($breakpoints, $size)) {
+        @content;
+    };
+};

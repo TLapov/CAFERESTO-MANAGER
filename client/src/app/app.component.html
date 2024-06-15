@@ -1,2 +1,7 @@
-<h1>Hello world</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <app-input name="Username" label="Username" formControlName="username"></app-input>
+    <app-input name="Password" label="Password" type="password" formControlName="password"></app-input>
+    <button type="submit">Click</button>
+</form>
+<app-spinner />
 <router-outlet />
