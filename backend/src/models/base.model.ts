@@ -4,9 +4,11 @@ import db from "../config/db.config";
 export class BaseModel {
     tableName!: string;
     primaryKey!: string;
+    relationTable?: BaseModel;
+    forgeinKey?: string;
 
     async sqlFind<T>(): Promise<T[]> {
-        const sql = `SELECT * FROM ${this.tableName}`;
+        const sql = `SELECT * FROM ${this.tableName} ${this.forgeinKey ? this.sqlJoin() : ''}`;
         const [result] = await db.execute(sql);
         return result as T[];
     }
@@ -33,5 +35,11 @@ export class BaseModel {
         const [result] = await db.execute(sql, [id]);
         return result as ResultSetHeader;
     }
-}
 
+    sqlJoin(): string {
+        let table = this.relationTable?.tableName;
+        let tablePrimaryKey = this.relationTable?.primaryKey;
+        return `INNER JOIN ${table} ON ${this.tableName}.${this.forgeinKey} = ${table}.${tablePrimaryKey}`;
+    }
+
+}

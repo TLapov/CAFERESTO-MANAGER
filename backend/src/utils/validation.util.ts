@@ -13,7 +13,7 @@ class AppValidator{
     }
 
     private isMinLength(value: any, length: number): boolean {
-        return value >= length ? true : false;
+        return value.length >= length ? true : false;
     }
 
     public validate<T extends Record<string, any>>(reqObject: T) {

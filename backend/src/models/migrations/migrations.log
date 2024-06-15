@@ -1,3 +1,6 @@
 CREATED: 13. 06. 2024. 01:16:33 FILE: create-database.sql DESCRIPTION: testing
 CREATED: 13. 06. 2024. 01:24:15 FILE: 001.sql DESCRIPTION: creating_category_table
 CREATED: 13. 06. 2024. 12:34:54 FILE: 002-category.sql DESCRIPTION: add_unique_constrain_to_name
+CREATED: 13. 06. 2024. 19:43:19 FILE: 003-product.sql DESCRIPTION: create_table_product
+CREATED: 13. 06. 2024. 21:53:41 FILE: 004-columns.sql DESCRIPTION: rename_columns:products,category
+CREATED: 13. 06. 2024. 21:54:01 FILE: 004-columns.sql DESCRIPTION: rename_columns:products,category
