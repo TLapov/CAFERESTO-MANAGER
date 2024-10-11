@@ -2,6 +2,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const CURR_DIR = process.cwd();
+
 const BASE_PATH: string = '/';
 const API: string = `/api/${process.env.VERSION}`;
 
@@ -15,6 +17,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_DATABASE = process.env.DB_DATABASE;
 
 export {
+    CURR_DIR,
     BASE_PATH,
     API,
     PORT, 
