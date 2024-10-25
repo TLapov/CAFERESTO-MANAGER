@@ -5,7 +5,7 @@ import db from "./config/db.config";
 
 class App {
     app: Application = express();
-
+    
     public async start(): Promise<void> {
         try {
             await db.getConnection();

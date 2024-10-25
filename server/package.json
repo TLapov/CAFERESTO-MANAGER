@@ -1,11 +1,12 @@
 {
   "name": "caferesto-manager-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon server.ts",
-    "build": "tsc --build",
-    "start": "node ./build/server"
+    "build": "rm -rf ./build && tsc --build",
+    "start": "node ./build/server",
+    "migrate": "nodemon ./src/migrations/index.ts"
   },
   "keywords": [],
   "author": "",
