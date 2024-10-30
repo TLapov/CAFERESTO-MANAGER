@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.ts",
     "build": "rm -rf ./build && tsc --build",
+    "build:migrate": "rm -rf ./build-migration && tsc -p ./src/migration/tsconfig.migration.json",
+    "dev": "nodemon server.ts",
+    "migrate:dev": "nodemon ./src/migration/migration.ts",
     "start": "node ./build/server",
-    "migrate": "nodemon ./src/migrations/index.ts"
+    "migrate-init": "node ./build-migration/migration/initial.migration",
+    "migrate": "node ./build-migration/migration/main.migration"
   },
   "keywords": [],
   "author": "",

@@ -1,12 +1,10 @@
 import mysql, { PoolOptions } from 'mysql2/promise';
-import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './environment.config';
+import { DB_DATABASE, DB_ACCESS } from './environment.config';
 
 const access: PoolOptions = {
-    host: DB_HOST,
-    port: DB_PORT,
-    user: DB_USER,
-    password: DB_PASSWORD,
+    ...DB_ACCESS,
     database: DB_DATABASE
 }
 
-export default mysql.createPool(access);
+export const db = mysql.createPool(access);
+export const initDb = mysql.createPool({...DB_ACCESS, database: undefined});
