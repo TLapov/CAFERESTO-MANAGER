@@ -9,8 +9,9 @@
       "skipLibCheck": true,
       "esModuleInterop": true,
       "strictPropertyInitialization": false,
-      "useDefineForClassFields": false,                               
+      "useDefineForClassFields": false,
+      "experimentalDecorators": true                               
     },
-    "exclude": ["node_modules/"]
+    "exclude": ["node_modules/", "src/migration"]
   }
   

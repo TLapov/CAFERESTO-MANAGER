@@ -1,4 +1,5 @@
 # Compiled output
+/build-migration
 /build
 /tmp
 /out-tsc
