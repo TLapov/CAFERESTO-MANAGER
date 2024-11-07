@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 
-export class CustomError extends Error {
+export class AppError extends Error {
     status: number;
     code?: string
     
@@ -10,8 +10,9 @@ export class CustomError extends Error {
         this.code = code
     }
 
-    static errorHandler: ErrorRequestHandler = (err: CustomError, req: Request, res: Response, next: NextFunction) => {
-        res.status(err.status).send({
+    static errorHandler: ErrorRequestHandler = (err: AppError, req: Request, res: Response, next: NextFunction) => {
+        const status = err.status ? err.status : 500;
+        res.status(status).send({
             success: false,
             statusCode: status,
             message: err.message 

@@ -6,7 +6,7 @@ export class BaseModel {
 
     async sqlFind() {
         const sql = `SELECT * FROM ${this.table}`;
-        const data = await db.execute(sql);
+        const [data] = await db.execute(sql);
         return data;
     }
 }
