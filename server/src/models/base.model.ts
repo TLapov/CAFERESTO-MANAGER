@@ -4,9 +4,21 @@ export class BaseModel {
     table: string;
     primaryKey: string;
 
-    async sqlFind() {
+    async findAll() {
         const sql = `SELECT * FROM ${this.table}`;
-        const data = await db.execute(sql);
+        const [data] = await db.execute(sql);
         return data;
+    }
+
+    async create() {
+
+    }
+
+    async update() {
+
+    }
+
+    async delete() {
+        
     }
 }
