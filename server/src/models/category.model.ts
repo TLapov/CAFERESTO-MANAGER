@@ -1,5 +1,11 @@
 import { BaseModel } from "./base.model";
 
+export interface ICategory {
+    category_id?: number;
+    name: string;
+    active: boolean;
+};
+
 class CategoryModel extends BaseModel {
     constructor() {
         super();
