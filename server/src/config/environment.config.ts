@@ -6,6 +6,7 @@ const API: string = `/api/${process.env.VERSION}`;
 
 const PORT: number = Number(process.env.PORT);
 const HOST: string = process.env.HOST || 'localhost';
+const NODE_ENV: string = process.env.NODE_ENV as string;
 
 const DB_ACCESS = {
     port: Number(process.env.DB_PORT),
@@ -19,6 +20,7 @@ export {
     API,
     PORT, 
     HOST,
+    NODE_ENV,
     DB_ACCESS,
     DB_DATABASE
 }

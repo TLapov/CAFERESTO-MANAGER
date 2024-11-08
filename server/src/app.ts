@@ -2,15 +2,15 @@ import process from "node:process";
 import express, { Application, ErrorRequestHandler } from "express";
 import { API, HOST, PORT } from "./config/environment.config";
 import { db } from "./config/db.config";
-import { initalController } from "./controllers/inital.controller";
 import { AppError } from "./services/error.service";
+import { initialRoutes } from "./routes/index.routes";
 
 class App {
     app: Application = express();
     
     constructor(){
       this.app.use(express.json());
-      this.app.use(API, initalController);
+      this.app.use(API, initialRoutes);
       this.app.use(AppError.errorHandler);
     }
 
