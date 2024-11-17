@@ -2,8 +2,9 @@
     "compilerOptions": {
       "rootDir": "./",
       "target": "es2016",                              
-      "module": "commonjs",                                
-      "outDir": "./build",                                 
+      "module": "CommonJS",                                
+      "outDir": "./build",
+      "moduleResolution": "Node",                                 
       "forceConsistentCasingInFileNames": true,           
       "strict": true,                                      
       "skipLibCheck": true,
