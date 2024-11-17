@@ -8,8 +8,8 @@
     "dev": "nodemon server.ts",
     "migrate:dev": "nodemon ./src/migration/index.migration.ts",
     "start": "node ./build/server",
-    "migrate:init": "node ./build-migration/migration/index.migration --init",
-    "migrate": "node ./build-migration/migration/index.migration"
+    "migrate": "node ./build-migration/migration/index.migration",
+    "test": "nodemon ./test/index.ts"
   },
   "keywords": [],
   "author": "",
