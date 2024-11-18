@@ -1,4 +1,4 @@
-import {db} from "../../config/db.config";
+import {db} from "../../src/config/db.config";
 
 class Category {
     name = 'category';

@@ -2,16 +2,15 @@
     "compilerOptions": {
       "module": "commonjs",
       "target": "es6",
-      "outDir": "../../build-migration",
+      "outDir": "../build-migration",
       "rootDir": "../",
       "strict": true,
       "esModuleInterop": true,
       "baseUrl": "./",
     },
     "include": [
-        "../config/environment.ts",  
-        "../config/db.config.ts",                 
-        "../utils/cli.ts",                        
+        "../src/config/environment.config.ts",  
+        "../src/config/db.config.ts",                 
         "./**/*.ts"                            
     ]
-  }
+}

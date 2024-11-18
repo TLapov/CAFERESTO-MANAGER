@@ -1,36 +1,21 @@
-import process from 'node:process';
-import fs from 'node:fs';
+import fs from 'fs';
 import path from 'node:path';
-import { db, initDb } from "../config/db.config";
-import { askQustion, GREEN, RED } from '../utils/cli.util';
+import { askQustion, writeMsg } from "./util.migration";
+import { db, initDb } from '../src/config/db.config';
+import { DB_DATABASE, NODE_ENV } from '../src/config/environment.config';
 import { RowDataPacket } from 'mysql2';
-import { DB_DATABASE, NODE_ENV } from '../config/environment.config';
 
-const writeMsg = (msg: string | Error) => {
-  const isError = typeof msg !== 'string';
-  if(isError) {
-    console.error(RED, `Migration fail\n${msg}\nTRY AGAIN!!!!`);
-    main();
-  }else {
-    console.log(GREEN, msg);
-    process.exit(0);
-  }
-}
-
-const main = async() => {
-  const initalMigrate:string | undefined = process.argv[2]; 
-  if(initalMigrate && initalMigrate === '--init') {
+const main = async(): Promise<void> => {
+  const fileExtenstion:string = NODE_ENV === 'production' ? '.js' : '.ts';
+  const select_file = await askQustion('What is your migration file');
+  const PATH:string = path.join(__dirname, 'migration-files', select_file);
+  try {
     await initDb.execute(`CREATE DATABASE IF NOT EXISTS ${DB_DATABASE}`);
     await db.execute(`CREATE TABLE IF NOT EXISTS migration (
         id VARCHAR(40) PRIMARY KEY UNIQUE,
         description VARCHAR(100) NOT NULL,
         created TIMESTAMP DEFAULT CURRENT_TIMESTAMP)`
     );
-  }
-  const fileExtenstion:string = NODE_ENV === 'production' ? '.js' : '.ts';
-  const select_file = await askQustion('What is your migration file');
-  try {
-    const PATH:string = path.join(__dirname, 'migration-files', select_file);
     if(!fs.existsSync(`${PATH}${fileExtenstion}`)) {
       throw Error('The file doesn`t exist try again');
     }
@@ -57,8 +42,8 @@ const main = async() => {
       throw Error('Action must be up or down');
     }
     writeMsg('Migration is done succesfully');
-  }catch (error: unknown | Error){ 
-    writeMsg(error as Error) 
+  }catch (error: unknown | Error){
+    error instanceof Error && writeMsg(error); 
   }finally {
     await initDb.end();
     await db.end();
