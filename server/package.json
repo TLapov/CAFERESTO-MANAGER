@@ -4,9 +4,9 @@
   "main": "server.js",
   "scripts": {
     "build": "rm -rf ./build && tsc --build",
-    "build:migrate": "rm -rf ./build-migration && tsc -p ./src/migration/tsconfig.migration.json",
+    "build:migrate": "rm -rf ./build-migration && tsc -p ./migration/tsconfig.migration.json",
     "dev": "nodemon server.ts",
-    "migrate:dev": "nodemon ./src/migration/index.migration.ts",
+    "migrate:dev": "nodemon ./migration/index.migration.ts",
     "start": "node ./build/server",
     "migrate": "node ./build-migration/migration/index.migration",
     "test": "nodemon ./test/index.ts"

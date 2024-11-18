@@ -13,6 +13,6 @@
       "useDefineForClassFields": false,
       "experimentalDecorators": true                               
     },
-    "exclude": ["node_modules/", "src/migration"]
+    "exclude": ["node_modules/", "migration", "test"]
   }
   

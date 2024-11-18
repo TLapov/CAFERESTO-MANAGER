@@ -1,9 +1,9 @@
-import fs from 'node:fs';
+import fs from 'fs';
 import path from 'node:path';
-import { db, initDb } from "../config/db.config";
+import { askQustion, writeMsg } from "./util.migration";
+import { db, initDb } from '../src/config/db.config';
+import { DB_DATABASE, NODE_ENV } from '../src/config/environment.config';
 import { RowDataPacket } from 'mysql2';
-import { DB_DATABASE, NODE_ENV } from '../config/environment.config';
-import { askQustion, writeMsg } from './util.migration';
 
 const main = async(): Promise<void> => {
   const fileExtenstion:string = NODE_ENV === 'production' ? '.js' : '.ts';
