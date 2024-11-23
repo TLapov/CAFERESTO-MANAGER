@@ -5,9 +5,8 @@ import App from "../src/app";
 
 describe('Testing application', () => {
     let app: App = new App();
-
     before(async() => await app.start());
-    
+
     it('Application will start correct', async() => {
         try {
             assert.ok(true);
@@ -16,17 +15,16 @@ describe('Testing application', () => {
         }
     });
 
-    it('Application should fail to start if database is unreachable', async () => {
+    it('Application should fail to start if database is unreachable',  async() => {
         process.env.DB_HOST = 'invalid-host';
         try {
             assert.fail('Application should have thrown an error');
         } catch (error) {
             assert.ok(true);
-            // assert.match(String(error), /Database error/, 'Expected database connection error');
         }
     });
     
-
-
-    after(async() => await app.close());
+    after(async() => {
+        await app.close();
+    });
 })

@@ -9,4 +9,4 @@ class InitialRoutes {
     }
 }
 
-export const initialRoutes = new InitialRoutes().router;
+export const appRoutes = new InitialRoutes().router;
