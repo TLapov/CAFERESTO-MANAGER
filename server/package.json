@@ -1,15 +1,17 @@
 {
   "name": "caferesto-manager-server",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "./build/server.js",
+  "type": "module",
   "scripts": {
     "build": "rm -rf ./build && tsc --build",
     "build:migrate": "rm -rf ./build-migration && tsc -p ./migration/tsconfig.migration.json",
-    "dev": "nodemon server.ts",
-    "migrate:dev": "nodemon ./migration/index.migration.ts",
-    "start": "node ./build/server",
-    "migrate": "node ./build-migration/migration/index.migration",
-    "test": "nodemon ./test/index.ts"
+    "clean": "rm -rf ./build && rm -rf ./build-migration",
+    "dev": "node --watch --import tsx ./server.ts",
+    "migrate:dev": "node --watch --import tsx ./migration/index.migration.ts",
+    "start": "node --import=extensionless/register ./build/server",
+    "migrate": "node --import=extensionless/register ./build-migration/migration/index.migration",
+    "test": "node --import tsx --test --test-reporter=spec test/app.test.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,12 +20,13 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
+    "extensionless": "^1.9.9",
     "mysql2": "^3.11.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.7.4",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
     "typescript": "^5.6.2"
   }
 }

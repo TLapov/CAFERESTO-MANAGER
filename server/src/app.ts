@@ -1,10 +1,11 @@
 import process from "node:process";
-import express, { Application } from "express";
-import { API, HOST, PORT } from "./config/environment.config";
-import { db } from "./config/db.config";
-import { AppError } from "./services/error.service";
-import { initialRoutes } from "./routes/index.routes";
 import http, { Server } from "node:http";
+import express, { Application } from "express";
+import { db } from "./config/db.config";
+import { HOST, PORT, API } from "./config/environment.config";
+import { appRoutes } from "./routes/index.routes";
+import { AppError } from "./services/error.service";
+
 
 class App {
     app: Application = express();
@@ -13,7 +14,7 @@ class App {
     
     constructor(){
       this.app.use(express.json());
-      this.app.use(API, initialRoutes);
+      this.app.use(API, appRoutes);
       this.app.use(AppError.errorHandler);
       this.server = http.createServer(this.app);
     }
@@ -30,17 +31,15 @@ class App {
           }
     }
 
-    public async close(): Promise<void> {
-      try {
-        await db.end();
-        this.server.close(() => {
-          console.log(`Server on ${this.url} close`);
-          process.exit(0);
-        }); 
-      } catch (error) {
-        console.error(error);
-        process.exit(1)
-      }
+    public async close() {
+        this.server.close(async() => {
+          try{
+            await db.end();
+            console.log(`Server on ${this.url} close`);
+          }catch(error: unknown) {
+            console.error('Error occured during close server and database\n' + error);
+          }
+        })
     }
 
 }
