@@ -42,12 +42,14 @@ class Migration {
         const description = await this.askQuestion('Write some description for this migration');
         await db.execute('INSERT INTO migration (id, description) VALUES (?,?)', [this.select_file, description]);
       }else {
-        if(!existFile) throw Error('The migration not exist and we cant do down migration!');
+        if(!existFile.length) throw Error('The migration not exist and we cant do down migration!');
         await migration_class.down();
-        await db.execute(`DELETE FROM migration WHERE id = ?`, this.select_file);
+        await db.execute(`DELETE FROM migration WHERE id = ?`, [this.select_file]);
       }
       this.writeMsg('Migration done succesfully');
+      await this.destroyDB();
       process.exit(0);
+      
     }
   }
 
@@ -107,14 +109,28 @@ class Migration {
     return file_path;
   }
 
+  private async destroyDB() {
+    await initDb.end();
+    await db.end();
+  }
+
 }
 
 (async() => {
   const migration = new Migration();
-  try {
-    await migration.runMigration(); 
-  } catch (error) {
-      migration.writeMsg(error);
+  let run = true;
+  while(run) {
+    try {
       await migration.runMigration();
+      run = false; 
+    } catch (error) {
+        migration.writeMsg(error);
+        const retry = await migration.askQuestion('Retry migration? (yes/no)');
+        run = retry.toLowerCase() === 'yes';
+        if(!run) {
+          migration.writeMsg('Exit migration....');
+          process.exit(1);
+        }
+    }
   }
 })();
