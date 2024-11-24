@@ -10,11 +10,9 @@ class Category {
                 active INT
             )`
         )
-        await db.end();
     }
     async down() {
         await db.query(`DROP TABLE IF EXISTS ${this.name}`);
-        await db.end();
     }
 }
 
