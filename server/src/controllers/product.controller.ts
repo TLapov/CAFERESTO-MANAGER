@@ -1,15 +1,12 @@
 import { NextFunction, Request, Response} from "express";
 import { AppResponse } from "../services/response.service";
-import { categoryService } from "../services/category.service";
 import { HttpStatusCode } from "../config/constants.config";
-import { ICategory } from "../models/category.model";
 
-export class CategoryController {
+export class ProductController {
 
     async getAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const categories = await categoryService.getCategories();
-            AppResponse.successResponse(res, HttpStatusCode.SUCCESS, 'Get category success', categories);
+            AppResponse.notImplemented(res);
         } catch(error: unknown) {
             next(error)
         }
@@ -18,8 +15,7 @@ export class CategoryController {
     async create(req: Request, res: Response, next: NextFunction) {
         try {
             const payload = req.body;
-            const category = await categoryService.createCategory(payload);
-            AppResponse.successResponse(res, HttpStatusCode.CREATED, 'Create category success', category)
+            AppResponse.notImplemented(res);    
         } catch (error) {
             next(error);
         }
@@ -28,8 +24,7 @@ export class CategoryController {
     async update(req: Request, res: Response, next: NextFunction) {
         try {
             const payload = req.body;
-            await categoryService.updateCategory(payload);
-            AppResponse.successResponse(res, HttpStatusCode.SUCCESS, 'Update category success');
+            AppResponse.notImplemented(res);          
         } catch (error) {
             next(error);
         }
@@ -38,12 +33,11 @@ export class CategoryController {
     async delete(req: Request, res: Response, next: NextFunction) {
         try {
             const id = Number(req.params.id);
-            await categoryService.deleteCategory(id);
-            AppResponse.successResponse(res, HttpStatusCode.NO_CONTENT, 'Delete category success')
+            AppResponse.notImplemented(res);  
         } catch (error) {
             next(error);
         }
     }
 }
 
-export const categoryController = new CategoryController();
+export const productController = new ProductController();
