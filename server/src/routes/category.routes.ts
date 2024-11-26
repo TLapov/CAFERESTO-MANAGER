@@ -6,10 +6,10 @@ export default class CategoryRoutes {
     router: Router = Router();
     
     constructor() {
-        this.router.get(this.PATH, categoryController.getCategories);
-        this.router.post(this.PATH, categoryController.createCategory);
-        this.router.patch(this.PATH, categoryController.updateCategory);
-        this.router.delete(`${this.PATH}/:id`, categoryController.deleteCategory);
+        this.router.get(this.PATH, categoryController.getAll);
+        this.router.post(this.PATH, categoryController.create);
+        this.router.patch(this.PATH, categoryController.update);
+        this.router.delete(`${this.PATH}/:id`, categoryController.delete);
     }
 }
 

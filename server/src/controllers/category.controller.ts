@@ -6,7 +6,7 @@ import { ICategory } from "../models/category.model";
 
 export class CategoryController {
 
-    async getCategories(req: Request, res: Response, next: NextFunction) {
+    async getAll(req: Request, res: Response, next: NextFunction) {
         try {
             const categories = await categoryService.getCategories();
             AppResponse.successResponse(res, HttpStatusCode.SUCCESS, 'Get category success', categories);
@@ -15,7 +15,7 @@ export class CategoryController {
         }
     }
 
-    async createCategory(req: Request, res: Response, next: NextFunction) {
+    async create(req: Request, res: Response, next: NextFunction) {
         try {
             const payload = req.body;
             const category = await categoryService.createCategory(payload);
@@ -25,7 +25,7 @@ export class CategoryController {
         }
     }
 
-    async updateCategory(req: Request, res: Response, next: NextFunction) {
+    async update(req: Request, res: Response, next: NextFunction) {
         try {
             const payload = req.body;
             await categoryService.updateCategory(payload);
@@ -35,7 +35,7 @@ export class CategoryController {
         }
     }
 
-    async deleteCategory(req: Request, res: Response, next: NextFunction) {
+    async delete(req: Request, res: Response, next: NextFunction) {
         try {
             const id = Number(req.params.id);
             await categoryService.deleteCategory(id);
